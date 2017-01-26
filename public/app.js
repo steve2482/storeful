@@ -50,7 +50,7 @@ function getInventoryItems(callbackFn) {
 
 function displayInventoyItems(data) {
   for (let i = 0; i < data.items.length; i++) {
-    $('.inventory-items').append(
+    $('#inventory-items').append(
       `<tr>
         <td>${data.items[i].itemName}</td>
         <td>${data.items[i].balanceOnHand}</td>
@@ -60,6 +60,27 @@ function displayInventoyItems(data) {
         <td><button class="button" id="delete-button">DELETE</button></td>
         <td><button class="button" id="sold-button">SOLD</button></td>
       </tr>`);
+    $('#sales-history').append(
+      `<tr>
+        <td>${data.items[i].itemName}</td>
+        <td>${data.items[i].sold}</td>
+      </tr>`);
+  }
+  let vendors = [];
+  for (let i = 0; i < data.items.length; i++) {
+    vendors.push(data.items[i].vendor);  
+  }
+  let uniqueVendors = [];
+  $.each(vendors, function(i, el) {
+    if ($.inArray(el, uniqueVendors) === -1) uniqueVendors.push(el);
+  });
+  uniqueVendors.sort();
+  console.log(uniqueVendors);
+  for (let i = 0; i < uniqueVendors.length; i++) {
+    $('#vendors').append(
+      '<tr>' +
+        '<td>' + uniqueVendors[i] + '</td>' +
+      '</tr>');
   }
 }
 

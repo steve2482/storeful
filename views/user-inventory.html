@@ -10,38 +10,59 @@
 		<h1 class="business-name">Your Business Name Here</h1>
 	</div>
 	<div class="navigation">
-		<a href="&" id="current">Current Invetory</a> <a href="&" id="sales">Sales History</a> <a href="&" id="vendor">Vendor List</a>
+		<button id="current-inventory">Current Inventory</button> <button id="sales">Sales History</button> <button id="Vendors">Vendors</button>
 	</div>
 
 	<!-- Item addition form -->
-	<div>
-		<button class="button" id="add-button">ADD</button>
-	</div>
-	<div class="item-form">
-		<form>
-			<input type="text" name="itemName" placeholder="Item Name"><br>
-			<input type="text" name="vendor" placeholder="Vendor"><br>
-			<input type="number" name="unitPrice" placeholder="Unit Price"><br>
-			<input type="number" name="retailPrice" placeholder="Retail Price"><br>
-			<input type="number" name="boh" placeholder="Balance On Hand"><br>
-			<input type="number" name="ril" placeholder="Requested Inventory Level">
-		</form>
-	</div>
+	<section class="add-item">
+		<div>
+			<button class="button" id="add-button">ADD</button>
+		</div>
+		<div class="item-form">
+			<form>
+				<input type="text" name="itemName" placeholder="Item Name"><br>
+				<input type="text" name="vendor" placeholder="Vendor"><br>
+				<input type="number" name="unitPrice" placeholder="Unit Price"><br>
+				<input type="number" name="retailPrice" placeholder="Retail Price"><br>
+				<input type="number" name="boh" placeholder="Balance On Hand"><br>
+				<input type="number" name="ril" placeholder="Requested Inventory Level">
+			</form>
+		</div>
+	</section>	
 
 	<!-- Inventory list -->
 	<div class="business-inventory">
-		<h2 class="inventory-name">Your Business' Inventory</h2>
-	<table class="inventory-items">
-		<tr>
-			<th>Item</th>
-			<th>BOH</th>
-			<th>RIL</th>
-			<th>Sold</th>
-		</tr>
+		<h2 class="data-title">Your Business' Inventory</h2>
+		<table class="data-items" id="inventory-items">
+			<tr>
+				<th>Item</th>
+				<th>BOH</th>
+				<th>RIL</th>
+				<th>Sold</th>
+			</tr>
+		</table>
+	</div>
 
-	</table>
-	</div>	
-	
+	<!-- Sales History -->
+	<div class="sales-history">
+		<h2 class="data-title">Your Sales History</h2>
+		<table class="data-items" id="sales-history">
+			<tr>
+				<th>Item</th>
+				<th>Sold</th>
+			</tr>
+		</table>
+	</div>
+
+	<!-- Vendor List -->
+	<div class="vendor-list">
+		<h2 class="data-title">Your Vendors</h2>
+		<table class="data-items" id="vendors">
+			<tr>
+				<th>Vendor</th>
+			</tr>
+		</table>
+	</div>
 	<script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
