@@ -55,6 +55,9 @@ function displayInventoyItems(data) {
         <td>${data.items[i].balanceOnHand}</td>
         <td>${data.items[i].requestedInventoryLevel}</td>
         <td>${data.items[i].sold}</td>
+        <td><button class="button" id="update-button">UPDATE</button></td>
+        <td><button class="button" id="delete-button">DELETE</button></td>
+        <td><button class="button" id="sold-button">SOLD</button></td>
       </tr>`);
   }
 }
