@@ -5,7 +5,29 @@
 	<title>User Inventory</title>
 </head>
 <body>
-	<h2 class="inventory-name">Your Business' Inventory</h2>
+	<!-- Business display header -->
+	<div class="business-display">
+		<h1 class="business-name">Your Business Name Here</h1>
+	</div>
+
+	<!-- Item addition form -->
+	<div class="button">
+		<button class="add-button">ADD</button>
+	</div>
+	<div class="item-form">
+		<form>
+			<input type="text" name="itemName" placeholder="Item Name"><br>
+			<input type="text" name="vendor" placeholder="Vendor"><br>
+			<input type="number" name="unitPrice" placeholder="Unit Price"><br>
+			<input type="number" name="retailPrice" placeholder="Retail Price"><br>
+			<input type="number" name="boh" placeholder="Balance On Hand"><br>
+			<input type="number" name="ril" placeholder="Requested Inventory Level">
+		</form>
+	</div>
+
+	<!-- Inventory list -->
+	<div class="business-inventory">
+		<h2 class="inventory-name">Your Business' Inventory</h2>
 	<table class="inventory-items">
 		<tr>
 			<th>Item</th>
@@ -15,6 +37,7 @@
 		</tr>
 
 	</table>
+	</div>	
 	
 	<script
   src="https://code.jquery.com/jquery-2.2.4.js"
