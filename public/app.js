@@ -68,7 +68,7 @@ function displayInventoyItems(data) {
   }
   let vendors = [];
   for (let i = 0; i < data.items.length; i++) {
-    vendors.push(data.items[i].vendor);  
+    vendors.push(data.items[i].vendor);
   }
   let uniqueVendors = [];
   $.each(vendors, function(i, el) {
