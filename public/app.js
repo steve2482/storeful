@@ -35,6 +35,7 @@ let INVENTORY_ITEMS = {
       itemName: "Laundry Detergent 100oz",
       unitPrice: 5.75,
       retailPrice: 11.95,
+      balanceOnHand: 2,
       requestedInventoryLevel: 4,
       sold: 2,
       vendor: "The Cleaning Company"
@@ -48,8 +49,13 @@ function getInventoryItems(callbackFn) {
 
 function displayInventoyItems(data) {
   for (let i = 0; i < data.items.length; i++) {
-    $('body').append(
-      '<p>' + data.items[i].itemName + '</p>');
+    $('.inventory-items').append(
+      `<tr>
+        <td>${data.items[i].itemName}</td>
+        <td>${data.items[i].balanceOnHand}</td>
+        <td>${data.items[i].requestedInventoryLevel}</td>
+        <td>${data.items[i].sold}</td>
+      </tr>`);
   }
 }
 
