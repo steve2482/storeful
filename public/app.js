@@ -1,3 +1,4 @@
+// Mock data
 let INVENTORY_ITEMS = {
   items: [
     {
