@@ -19,7 +19,7 @@ describe('Root Url', function() {
 
   it('should show the user-inventory html and send a 200 status code', function() {
     return chai.request(app)
-    .get('/user-inventory.html')
+    .get('/inventory')
     .then(function(res) {
       res.should.have.status(200);
       // HTML test code here
