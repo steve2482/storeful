@@ -88,6 +88,33 @@ function getAndDisplayItems() {
   getInventoryItems(displayInventoyItems);
 }
 
+function showSalesHistory() {
+  $('.add-item').hide();
+  $('.business-inventory').hide();
+  $('.vendor-list').hide();
+  $('.sales-history').show();
+}
+
+function showCurrentInvetory() {
+  $('.add-item').show();
+  $('.business-inventory').show();
+  $('.vendor-list').hide();
+  $('.sales-history').hide();
+}
+
+function showVendors() {
+  $('.add-item').hide();
+  $('.business-inventory').hide();
+  $('.vendor-list').show();
+  $('.sales-history').hide();
+}
+
 $(document).ready(function() {
   getAndDisplayItems();
+
+  $('#sales').click(showSalesHistory);
+
+  $('#current-inventory').click(showCurrentInvetory);
+
+  $('#vendor-button').click(showVendors);
 });
