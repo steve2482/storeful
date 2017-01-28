@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const should = chai.should();
 
 const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} =require('../config');
+const {TEST_DATABASE_URL} = require('../config');
 chai.use(chaiHttp);
 
 describe('checking URLs', function() {

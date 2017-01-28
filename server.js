@@ -16,9 +16,9 @@ app.get('/inventory', (req, res) => {
 });
 
 let server;
-function runServer(databaseURl = DATABASE_URL, port = PORT) {
+function runServer(databaseURL = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(databaseURL, err => {
       if (err) {
         return reject(err);
       }
