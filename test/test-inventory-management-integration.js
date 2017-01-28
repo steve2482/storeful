@@ -13,7 +13,7 @@ describe('Root Url', function() {
     .get('/')
     .then(function(res) {
       res.should.have.status(200);
-      // res.should.include('html');
+      res.should.be.html;
     });
   });
 
@@ -22,7 +22,7 @@ describe('Root Url', function() {
     .get('/inventory')
     .then(function(res) {
       res.should.have.status(200);
-      // HTML test code here
+      res.should.be.html;
     });
   });
 });
