@@ -130,9 +130,7 @@ $(document).ready(function() {
       sold: 0,
       vendor: $('#vendor').val()
     };
-    console.log(item);
     INVENTORY_ITEMS.items.push(item);
-    console.log(INVENTORY_ITEMS.items);
   }
 
   getAndDisplayItems();
