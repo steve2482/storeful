@@ -44,15 +44,6 @@ let INVENTORY_ITEMS = {
   ]
 };
 
-// Mock users
-let USER_DATA = {
-  users: [
-    {
-      userName: 'Steve',
-      password: 'password'
-    }]
-};
-
 $(document).ready(function() {
   function getInventoryItems(callbackFn) {
     setTimeout(function() {callbackFn(INVENTORY_ITEMS)}, 100);
