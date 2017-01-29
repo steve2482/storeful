@@ -1,5 +1,3 @@
-
-const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -45,10 +43,6 @@ const UserSchema = mongoose.Schema({
       }
     }]
 });
-
-UserSchema.methods.validatePassord = function(password) {
-  return bcrypt.compare(password, this.password);
-};
 
 const User = mongoose.model('User', UserSchema);
 
