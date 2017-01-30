@@ -1,3 +1,5 @@
+const ROOT_URL = 'http://localhost:8080';
+
 // Mock data
 let INVENTORY_ITEMS = {
   items: [
@@ -76,7 +78,6 @@ $(document).ready(function() {
       if ($.inArray(el, uniqueVendors) === -1) uniqueVendors.push(el);
     });
     uniqueVendors.sort();
-    console.log(uniqueVendors);
     for (let i = 0; i < uniqueVendors.length; i++) {
       $('#vendors').append(
         '<tr>' +
@@ -112,16 +113,19 @@ $(document).ready(function() {
 
   function addItem() {
     let item = {
-      id: Math.random() * 1000,
-      itemName: $('#itemName').val(),
-      unitPrice: $('#unitPrice').val(),
-      retailPrice: $('#retailPrice').val(),
-      balanceOnHand: $('#balanceOnHand').val(),
-      requestedInventoryLevel: $('#requestedInventoryLevel').val(),
-      sold: 0,
-      vendor: $('#vendor').val()
+      'itemName': $('#itemName').val(),
+      'unitPrice': $('#unitPrice').val(),
+      'retailPrice': $('#retailPrice').val(),
+      'balanceOnHand': $('#balanceOnHand').val(),
+      'requestedInventoryLevel': $('#requestedInventoryLevel').val(),
+      'sold': 0,
+      'vendor': $('#vendor').val()
     };
-    INVENTORY_ITEMS.items.push(item);
+    $.post(ROOT_URL + '/inventory', item, function() {
+      // get GET request working
+      // append to list
+      alert(`${item.itemName} has been added`);
+    });
   }
 
   getAndDisplayItems();

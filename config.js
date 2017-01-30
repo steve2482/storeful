@@ -3,5 +3,5 @@ exports.DATABASE_URL = process.env.DATABASE_URL ||
                        'mongodb://localhost/storeful';
 exports.TEST_DATABASE_URL = (
 	process.env.TEST_DATABASE_URL ||
-  'mongodb://localhost/storeful-test-db');
+	'mongodb://localhost/storeful-test-db');
 exports.PORT = process.env.PORT || 8080;
