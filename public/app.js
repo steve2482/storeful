@@ -85,7 +85,7 @@ $(document).ready(function() {
         </tr>`);
     }
     let vendors = [];
-    for (let i = 0; i < datalength; i++) {
+    for (let i = 0; i < data.length; i++) {
       vendors.push(data[i].vendor);
     }
     let uniqueVendors = [];
