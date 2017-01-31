@@ -119,4 +119,33 @@ describe('testing', function() {
         });
     });
   });
+
+  describe('PUT: Updating an existing inventory item', function() {
+    it('should update an existing item, returning the updated item and a 201 status code', function() {
+      let updateData = {
+        vendor: 'New Vendor',
+        retailPrice: 99.99
+      };
+      return InventoryItem
+        .findOne()
+        .exec()
+        .then(function(item) {
+          updateData.id = item.id;
+          return chai.request(app)
+          .put(`/inventory/{$item.id}`)
+          .send(updateData);
+        })
+        .then(function(res) {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.vendor.should.be.equal(updateData.vendor);
+          res.body.retailPrice.should.be.equal(updateData.retailPrice);
+          return InventoryItem.findById(updateData.id);
+        })
+        .then(function(item) {
+          item.vendor.should.be.equal(updateData.vendor);
+          item.retailPrice.should.be.equal(updateData.retailPrice);
+        });
+    });
+  });
 });

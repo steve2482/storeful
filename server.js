@@ -28,12 +28,12 @@ app.get('/inventory', (req, res) => {
 
 app.post('/inventory', jsonParser, (req, res) => {
   const requiredFields = ['itemName', 'balanceOnHand', 'requestedInventoryLevel', 'vendor'];
-  // requiredFields.forEach(field => {
-  //   if (!(field in req.body)) {
-  //     res.status(400).json(
-  //       {error: `Missing "${field}" in request body`});
-  //   }
-  // });
+  requiredFields.forEach(field => {
+    if (!(field in req.body)) {
+      res.status(400).json(
+        {error: `Missing "${field}" in request body`});
+    }
+  });
   InventoryItem
   .create({
     itemName: req.body.itemName,
@@ -49,6 +49,28 @@ app.post('/inventory', jsonParser, (req, res) => {
     console.log(err);
     res.status(500).json({error: 'Something went wrong'});
   });
+});
+
+app.put('/inventory/:id', jsonParser, (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+  const updated = [];
+  const updateableFields = ['itemName', 'unitPrice', 'retailPrice', 'balanceOnHand', 'requestedInventoryLevel', 'vendor'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+  InventoryItem
+    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+    .exec()
+    .then(updatedItem => res.status(201).json(updatedItem))
+    .catch(err => {
+      res.status(500).json({message: 'Something went wrong'});
+    });
 });
 
 let server;
