@@ -1,0 +1,11 @@
+body {
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+}
+
+.business-display, .navigation, .add-item, .business-inventory, .sales-history, .vendor-list {
+	display: none;
+}
