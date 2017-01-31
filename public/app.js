@@ -121,10 +121,15 @@ $(document).ready(function() {
       'sold': 0,
       'vendor': $('#vendor').val()
     };
-    $.post(ROOT_URL + '/inventory', item, function() {
-      // get GET request working
-      // append to list
-      alert(`${item.itemName} has been added`);
+    console.log(item);
+    $.ajax({
+      url: ROOT_URL + '/inventory',
+      type: 'POST',
+      data: JSON.stringify({data: item}),
+      contentType: 'application/json; charset=utf-8',
+      success: function() {
+        alert(`${item.itemName} has been added to inventory`);
+      }
     });
   }
 
