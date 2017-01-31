@@ -125,7 +125,7 @@ $(document).ready(function() {
     $.ajax({
       url: ROOT_URL + '/inventory',
       type: 'POST',
-      data: JSON.stringify({data: item}),
+      data: JSON.stringify(item),
       contentType: 'application/json; charset=utf-8',
       success: function() {
         alert(`${item.itemName} has been added to inventory`);
