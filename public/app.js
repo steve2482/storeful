@@ -48,7 +48,9 @@ let INVENTORY_ITEMS = {
 
 $(document).ready(function() {
   function getInventoryItems(callbackFn) {
-    setTimeout(function() {callbackFn(INVENTORY_ITEMS)}, 100);
+    $.get(ROOT_URL + '/inventory', function(data) {
+      return data;
+    });
   }
 
   function displayInventoyItems(data) {
@@ -121,7 +123,6 @@ $(document).ready(function() {
       'sold': 0,
       'vendor': $('#vendor').val()
     };
-    console.log(item);
     $.ajax({
       url: ROOT_URL + '/inventory',
       type: 'POST',
