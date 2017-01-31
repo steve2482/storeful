@@ -66,14 +66,23 @@ describe('testing', function() {
         res.should.be.html;
       });
     });
+  });
 
-    it('should show the user-inventory html and send a 200 status code', function() {
+  describe('GET: getting all inventory results', function() {
+    it('should get all inventory items, returning an array of objects and a 200 status code', function() {
+      let res;
       return chai.request(app)
-      .get('/inventory')
-      .then(function(res) {
-        res.should.have.status(200);
-        res.should.be.html;
-      });
+        .get('/inventory')
+        .then(function(_res) {
+          res = _res;
+          res.should.have.status(200);
+          res.body.should.be.array;
+          res.body.length.should.be.of.at.least(1);
+          return InventoryItem.count();
+        })
+        .then(function(count) {
+          res.body.should.have.length.of(count);
+        });
     });
   });
 

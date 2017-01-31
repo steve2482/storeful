@@ -14,17 +14,16 @@ app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'));
 
 app.get('/inventory', (req, res) => {
-  // res.sendFile(__dirname + '/views/user-inventory.html');
-  // InventoryItem
-  // .find()
-  // .exec()
-  // .then(item => {
-  //   res.json(item);
-  // })
-  // .catch(err => {
-  //   console.error(err);
-  //   res.status(500).json({error: 'Something went wrong'});
-  // });
+  InventoryItem
+  .find()
+  .exec()
+  .then(item => {
+    res.json(item);
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({error: 'Something went wrong'});
+  });
 });
 
 app.post('/inventory', jsonParser, (req, res) => {

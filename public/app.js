@@ -47,33 +47,46 @@ let INVENTORY_ITEMS = {
 };
 
 $(document).ready(function() {
+  function validateUser() {
+    let user = $('#user-name').val();
+    let password = $('#password').val();
+    if (user === 'Steve' && password === 'password') {
+      $('.sign-in').hide();
+      $('.business-display').show();
+      $('.navigation').show();
+      $('.add-item').show();
+      $('.business-inventory').show();
+    }
+  }
+
   function getInventoryItems(callbackFn) {
     $.get(ROOT_URL + '/inventory', function(data) {
-      return data;
+      console.log(data);
+      callbackFn(data);
     });
   }
 
   function displayInventoyItems(data) {
-    for (let i = 0; i < data.items.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       $('#inventory-items').append(
         `<tr>
-          <td>${data.items[i].itemName}</td>
-          <td>${data.items[i].balanceOnHand}</td>
-          <td>${data.items[i].requestedInventoryLevel}</td>
-          <td>${data.items[i].sold}</td>
+          <td>${data[i].itemName}</td>
+          <td>${data[i].balanceOnHand}</td>
+          <td>${data[i].requestedInventoryLevel}</td>
+          <td>${data[i].sold}</td>
           <td><button class="button" id="update-button">UPDATE</button></td>
           <td><button class="button" id="delete-button">DELETE</button></td>
           <td><button class="button" id="sold-button">SOLD</button></td>
         </tr>`);
       $('#sales-history').append(
         `<tr>
-          <td>${data.items[i].itemName}</td>
-          <td>${data.items[i].sold}</td>
+          <td>${data[i].itemName}</td>
+          <td>${data[i].sold}</td>
         </tr>`);
     }
     let vendors = [];
-    for (let i = 0; i < data.items.length; i++) {
-      vendors.push(data.items[i].vendor);
+    for (let i = 0; i < datalength; i++) {
+      vendors.push(data[i].vendor);
     }
     let uniqueVendors = [];
     $.each(vendors, function(i, el) {
@@ -139,4 +152,5 @@ $(document).ready(function() {
   $('#current-inventory').click(showCurrentInvetory);
   $('#vendor-button').click(showVendors);
   $('#add-button').click(addItem);
+  $('#submit').click(validateUser);
 });
