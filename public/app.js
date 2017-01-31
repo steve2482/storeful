@@ -61,7 +61,6 @@ $(document).ready(function() {
 
   function getInventoryItems(callbackFn) {
     $.get(ROOT_URL + '/inventory', function(data) {
-      console.log(data);
       callbackFn(data);
     });
   }
@@ -145,6 +144,15 @@ $(document).ready(function() {
         alert(`${item.itemName} has been added to inventory`);
       }
     });
+    $('#inventory-items').text('');
+    $('#inventory_items').append(
+      '<tr>' +
+        '<th>Item</th>' +
+        '<th>BOH</th>' +
+        '<th>RIL</th>' +
+        '<th>Sold</th>' +
+      '</tr>');
+    getAndDisplayItems();
   }
 
   getAndDisplayItems();
