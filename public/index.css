@@ -6,6 +6,6 @@ table {
 	margin: 0 auto;
 }
 
-.business-display, .navigation, .add-item, .business-inventory, .sales-history, .vendor-list {
+.business-display, .navigation, .add-item, .business-inventory, .sales-history, .vendor-list, #update-button-form {
 	display: none;
 }
