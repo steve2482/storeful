@@ -52,24 +52,26 @@ app.post('/inventory', jsonParser, (req, res) => {
 });
 
 app.put('/inventory/:id', jsonParser, (req, res) => {
+  console.log(req.params.id, req.body.id);
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
+    return res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
-  const updated = [];
+  const updated = {};
   const updateableFields = ['itemName', 'unitPrice', 'retailPrice', 'balanceOnHand', 'requestedInventoryLevel', 'vendor'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }
   });
+  console.log(updated);
   InventoryItem
     .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
     .exec()
     .then(updatedItem => res.status(201).json(updatedItem))
     .catch(err => {
-      res.status(500).json({message: 'Something went wrong'});
+      return res.status(500).json({message: 'Something went wrong'});
     });
 });
 

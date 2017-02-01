@@ -132,7 +132,7 @@ describe('testing', function() {
         .then(function(item) {
           updateData.id = item.id;
           return chai.request(app)
-          .put(`/inventory/{$item.id}`)
+          .put(`/inventory/${item.id}`)
           .send(updateData);
         })
         .then(function(res) {
