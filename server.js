@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const app = express();
 const jsonParser = require('body-parser').json();
 const {InventoryItem} = require('./models');
-const {PORT, DATABASE_URL} = require('./config');
+
 mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require('./config');
 
 app.use(bodyParser.json());
 
@@ -70,6 +72,18 @@ app.put('/inventory/:id', jsonParser, (req, res) => {
     .then(updatedItem => res.status(201).json(updatedItem))
     .catch(err => {
       return res.status(500).json({message: 'Something went wrong'});
+    });
+});
+
+app.delete('/inventory/:id', (req, res) => {
+  InventoryItem
+    .findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      res.status(204).json({message: 'success'});
+    })
+    .catch(err => {
+      res.status(500).json({error: 'Something went wrong'});
     });
 });
 

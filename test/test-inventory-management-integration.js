@@ -148,4 +148,26 @@ describe('testing', function() {
         });
     });
   });
+
+  describe('DELETE: Deleting an existing inventory item', function() {
+    it('should remove and existing item from the database and return a 204 status code', function() {
+      let deleted;
+      return InventoryItem
+      .findOne()
+      .exec()
+      .then(function(item) {
+        deleted = item;
+        return chai.request(app)
+          .delete(`/inventory/${item.id}`);
+      })
+      .then(function(res) {
+        res.should.have.status(204);
+        return InventoryItem.findById(deleted.id)
+        .exec();
+      })
+      .then(function(item) {
+        should.not.exist(item);
+      });
+    });
+  });
 });
