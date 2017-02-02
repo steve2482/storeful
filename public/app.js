@@ -79,7 +79,7 @@ $(document).ready(function() {
           <td id="sold-table${id}">${data[i].sold}</td>
           <td class="hidden" id="vendor-table${id}">${data[i].vendor}</td>
           <td><button class="update button" id="${id}">UPDATE</button></td>
-          <td><button class="button" id="delete-button">DELETE</button></td>
+          <td><button class="delete button" id="${id}">DELETE</button></td>
           <td><button class="button" id="sold-button">SOLD</button></td>          
         </tr>`);
       $('#sales-history').append(
@@ -181,6 +181,51 @@ $(document).ready(function() {
     $('.business-inventory').hide();
   }
 
+  function updateItem() {
+    let id = $('#id').val();
+    let item = {
+      id: id,
+      itemName: $('#itemName').val(),
+      unitPrice: $('#unitPrice').val(),
+      retailPrice: $('#retailPrice').val(),
+      balanceOnHand: $('#balanceOnHand').val(),
+      requestedInventoryLevel: $('#requestedInventoryLevel').val(),
+      sold: 0,
+      vendor: $('#vendor').val()
+    };
+    $.ajax({
+      url: `${ROOT_URL}/inventory/${id}`,
+      type: 'PUT',
+      data: JSON.stringify(item),
+      contentType: 'application/json',
+      success: function() {
+        alert(`${item.itemName} has been updated!`);
+      }
+    });
+    $('#inventory-items').text('');
+    $('#inventory_items').append(
+      '<tr>' +
+        '<th>Item</th>' +
+        '<th>BOH</th>' +
+        '<th>RIL</th>' +
+        '<th>Sold</th>' +
+      '</tr>');
+    getAndDisplayItems();
+    $('#add-button').show();
+    $('#update-button-form').hide();
+    $('.business-inventory').show();
+  }
+
+  function removeItem(id) {
+    $.ajax({
+      url: `${ROOT_URL}/inventory/${id}`,
+      type: 'DELETE',
+      success: function() {
+        alert('Item deleted!');
+      }
+    });
+  }
+
   getAndDisplayItems();
   $('#sales').click(showSalesHistory);
   $('#current-inventory').click(showCurrentInvetory);
@@ -190,5 +235,10 @@ $(document).ready(function() {
   $('#inventory-items').click('button', function(e) {
     let id = e.target.id;
     setUpdateFields(id);
+  });
+  $('#update-button-form').click(updateItem);
+  $('#inventory-items').click('button', function(e) {
+    let id = e.target.id;
+    removeItem(id);
   });
 });
