@@ -50,7 +50,7 @@ $(document).ready(function() {
   function validateUser() {
     let user = $('#user-name').val();
     let password = $('#password').val();
-    if (user === 'Steve' && password === 'password') {
+    if (user === '' && password === '') {
       $('.sign-in').hide();
       $('.business-display').show();
       $('.navigation').show();
@@ -66,22 +66,28 @@ $(document).ready(function() {
   }
 
   function displayInventoyItems(data) {
+    let id = 1;
     for (let i = 0; i < data.length; i++) {
       $('#inventory-items').append(
         `<tr>
-          <td>${data[i].itemName}</td>
-          <td>${data[i].balanceOnHand}</td>
-          <td>${data[i].requestedInventoryLevel}</td>
-          <td>${data[i].sold}</td>
-          <td><button class="button" id="update-button">UPDATE</button></td>
+          <td class="hidden" id="id-table${id}">${data[i]._id}</td>
+          <td id="itemName-table${id}">${data[i].itemName}</td>
+          <td class="hidden" id="unitPrice-table${id}">${data[i].unitPrice}</td>
+          <td class="hidden" id="retailPrice-table${id}">${data[i].retailPrice}</td>
+          <td id="boh-table${id}">${data[i].balanceOnHand}</td>
+          <td id="ril-table${id}">${data[i].requestedInventoryLevel}</td>
+          <td id="sold-table${id}">${data[i].sold}</td>
+          <td class="hidden" id="vendor-table${id}">${data[i].vendor}</td>
+          <td><button class="update button" id="${id}">UPDATE</button></td>
           <td><button class="button" id="delete-button">DELETE</button></td>
-          <td><button class="button" id="sold-button">SOLD</button></td>
+          <td><button class="button" id="sold-button">SOLD</button></td>          
         </tr>`);
       $('#sales-history').append(
         `<tr>
           <td>${data[i].itemName}</td>
           <td>${data[i].sold}</td>
         </tr>`);
+      id++;
     }
     let vendors = [];
     for (let i = 0; i < data.length; i++) {
@@ -139,7 +145,7 @@ $(document).ready(function() {
       url: ROOT_URL + '/inventory',
       type: 'POST',
       data: JSON.stringify(item),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json',
       success: function() {
         alert(`${item.itemName} has been added to inventory`);
       }
@@ -155,10 +161,34 @@ $(document).ready(function() {
     getAndDisplayItems();
   }
 
+  function setUpdateFields(id) {
+    let itemId = $(`#id-table${id}`).text();
+    let item = $(`#itemName-table${id}`).text();
+    let vendor = $(`#vendor-table${id}`).text();
+    let unitPrice = $(`#unitPrice-table${id}`).text();
+    let retailPrice = $(`#retailPrice-table${id}`).text();
+    let boh = $(`#boh-table${id}`).text();
+    let ril = $(`#ril-table${id}`).text();
+    $('#id').val(itemId);
+    $('#itemName').val(item);
+    $('#vendor').val(vendor);
+    $('#unitPrice').val(unitPrice);
+    $('#retailPrice').val(retailPrice);
+    $('#balanceOnHand').val(boh);
+    $('#requestedInventoryLevel').val(ril);
+    $('#add-button').hide();
+    $('#update-button-form').show();
+    $('.business-inventory').hide();
+  }
+
   getAndDisplayItems();
   $('#sales').click(showSalesHistory);
   $('#current-inventory').click(showCurrentInvetory);
   $('#vendor-button').click(showVendors);
   $('#add-button').click(addItem);
   $('#submit').click(validateUser);
+  $('#inventory-items').click('button', function(e) {
+    let id = e.target.id;
+    setUpdateFields(id);
+  });
 });
