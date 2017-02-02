@@ -4,10 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const jsonParser = require('body-parser').json();
 const {InventoryItem} = require('./models');
-
-mongoose.Promise = global.Promise;
-
 const {PORT, DATABASE_URL} = require('./config');
+mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
 
